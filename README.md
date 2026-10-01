@@ -1,6 +1,6 @@
 # Gemini 黑板风课程视频管线
 
-用 **Gemini 概念板图 + 克隆 TTS 旁白 + Remotion 渲染** 批量生产「黑板手绘风」讲解视频（16:9，1920×1080，每讲约 2.5 分钟）。已在 CS106A 系列 14+ 讲上量产验证，单讲生产耗时约 8 分钟（不含渲染）。
+用 **Gemini 概念板图 + 克隆 TTS 旁白 + Remotion 渲染** 批量生产「黑板手绘风」讲解视频（16:9，1920×1080，每讲约 2.5 分钟）。已在 CS106A 系列 27 讲上量产验证（覆盖课程全部讲座），单讲生产耗时约 8 分钟（不含渲染）。
 
 ## 管线
 
@@ -30,7 +30,7 @@ flowchart LR
 | `scripts/install_boards.py` | ffmpeg 归一化板图 + 回写 pack.json |
 | `scripts/build_from_pack.py` | pack.json → timeline.json + Remotion series 入口 |
 | `scripts/qa_slots.py` | 逐槽位粉笔字质检 |
-| `gen_tts.sh` | Qwen3-TTS 音色克隆批量合成 |
+| `scripts/gen_tts.sh` | Qwen3-TTS 音色克隆批量合成 |
 | `remotion/src/` | Lesson 渲染核心（SlotView / types） |
 | `remotion/public/boards/` | 8 张共享布局板图 + 3 张示例概念板图 |
 | `templates/board-prompts.md` | 全部出图 prompt 模板 |
@@ -46,8 +46,8 @@ cd remotion && npm install
 # 2. 写一讲的剧本 spec（参照 example/spec.json 字段说明）
 python3 scripts/gen_pack.py my_lecture/spec.json
 
-# 3. 合成旁白（需先准备音色参考与 TTS 工具链，见 gen_tts.sh 头注释）
-./gen_tts.sh my_lecture
+# 3. 合成旁白（需先准备音色参考与 TTS 工具链，见脚本头注释）
+scripts/gen_tts.sh my_lecture
 
 # 4. Gemini 出概念板图（浏览器需登录 gemini.google.com，见 LESSONS-LEARNED.md）
 #    写 /tmp/boards_job.json 后执行 scripts/gen_boards.js（omp eval 内 %load）
