@@ -1,0 +1,488 @@
+{
+ "schema_version": "1.0",
+ "course": "CS106A Lecture 11 · 多态与图形程序（Polymorphism in Graphics, SEE Java 版）",
+ "board_basis": "1672x941 源图，槽位坐标为 rect_1920x1080_px",
+ "research_notes": "事实来源：BJU CPS110(屏幕形状 Rectangle/Oval/RoundRect 各类共绘)；Weber CS1410(Shape 超类 + Circle/Rectangle/Triangle 多态绘制)；Oracle Graphics 抽象类与子类；Eck《Introduction to Computing》图形继承",
+ "scenes": [
+  {
+   "scene_id": "s01",
+   "image": "boards/cs106a_s01.png",
+   "pause_seconds": 0,
+   "caption": "CS106A 第二十一讲，多态与图形程序。上一讲学了继承和接口，这一讲看它们最漂亮的应用：屏幕绘图。一个问题：画一千个形状，要写一千行代码吗？",
+   "boxes": [
+    {
+     "box_id": "title",
+     "text": "第 21 讲 · 多态与图形程序",
+     "role": "title",
+     "font_size": 58,
+     "color": "#F5F4E8",
+     "align": "left",
+     "background": "transparent",
+     "stage": 1,
+     "rect_1920x1080_px": {
+      "x": 480,
+      "y": 360,
+      "w": 980,
+      "h": 100
+     }
+    },
+    {
+     "box_id": "sub",
+     "text": "斯坦福 CS106A · 编程方法论",
+     "role": "subtitle",
+     "font_size": 38,
+     "color": "#97D9F5",
+     "align": "left",
+     "background": "transparent",
+     "stage": 1,
+     "rect_1920x1080_px": {
+      "x": 484,
+      "y": 500,
+      "w": 900,
+      "h": 64
+     }
+    },
+    {
+     "box_id": "hook",
+     "text": "一个循环，画完一千个形状",
+     "role": "databar",
+     "font_size": 42,
+     "color": "#F6D87F",
+     "align": "left",
+     "background": "transparent",
+     "stage": 2,
+     "rect_1920x1080_px": {
+      "x": 484,
+      "y": 640,
+      "w": 760,
+      "h": 72
+     }
+    }
+   ]
+  },
+  {
+   "scene_id": "s02",
+   "image": "boards/cs106a_s02.png",
+   "pause_seconds": 0,
+   "caption": "屏幕上有圆、有方、有三角，各有各的画法。笨办法是逐个 if 判断，逐个画。聪明人发现：它们都是『形状』。",
+   "boxes": [
+    {
+     "box_id": "q",
+     "text": "圆方三角\n怎么画？",
+     "role": "body",
+     "font_size": 32,
+     "color": "#F6D87F",
+     "align": "center",
+     "background": "transparent",
+     "stage": 1,
+     "rect_1920x1080_px": {
+      "x": 460,
+      "y": 380,
+      "w": 260,
+      "h": 130
+     }
+    },
+    {
+     "box_id": "c1",
+     "text": "圆形",
+     "role": "celltext",
+     "font_size": 28,
+     "color": "#F5F4E8",
+     "align": "center",
+     "background": "transparent",
+     "stage": 1,
+     "rect_1920x1080_px": {
+      "x": 1160,
+      "y": 450,
+      "w": 170,
+      "h": 200
+     }
+    },
+    {
+     "box_id": "c2",
+     "text": "方形",
+     "role": "celltext",
+     "font_size": 28,
+     "color": "#F5F4E8",
+     "align": "center",
+     "background": "transparent",
+     "stage": 1,
+     "rect_1920x1080_px": {
+      "x": 1385,
+      "y": 450,
+      "w": 180,
+      "h": 200
+     }
+    },
+    {
+     "box_id": "c3",
+     "text": "三角形",
+     "role": "celltext",
+     "font_size": 28,
+     "color": "#F5F4E8",
+     "align": "center",
+     "background": "transparent",
+     "stage": 1,
+     "rect_1920x1080_px": {
+      "x": 1610,
+      "y": 450,
+      "w": 180,
+      "h": 200
+     }
+    },
+    {
+     "box_id": "fact",
+     "text": "逐个判断是笨办法",
+     "role": "databar",
+     "font_size": 34,
+     "color": "#97D9F5",
+     "align": "left",
+     "background": "transparent",
+     "stage": 2,
+     "rect_1920x1080_px": {
+      "x": 120,
+      "y": 920,
+      "w": 900,
+      "h": 66
+     }
+    }
+   ]
+  },
+  {
+   "scene_id": "s03",
+   "image": "boards/cs106a_l11_c1.png",
+   "pause_seconds": 0,
+   "caption": "把所有图形装进一个 Shape 列表。画图只有一个循环、一句 shape 点 draw——圆自己知道怎么画圆，方自己知道怎么画方。这就是多态的威力。",
+   "boxes": [
+    {
+     "box_id": "name",
+     "text": "Shape 列表",
+     "role": "celltitle",
+     "font_size": 46,
+     "color": "#F5F4E8",
+     "align": "center",
+     "background": "transparent",
+     "stage": 1,
+     "rect_1920x1080_px": {
+      "x": 190,
+      "y": 560,
+      "w": 330,
+      "h": 100
+     }
+    },
+    {
+     "box_id": "why",
+     "text": "一个循环\n一句 draw",
+     "role": "body",
+     "font_size": 36,
+     "color": "#F6D87F",
+     "align": "center",
+     "background": "transparent",
+     "stage": 2,
+     "rect_1920x1080_px": {
+      "x": 690,
+      "y": 400,
+      "w": 400,
+      "h": 90
+     }
+    },
+    {
+     "box_id": "fail",
+     "text": "各画各的\n互不打扰",
+     "role": "body",
+     "font_size": 34,
+     "color": "#97D9F5",
+     "align": "center",
+     "background": "transparent",
+     "stage": 3,
+     "rect_1920x1080_px": {
+      "x": 1370,
+      "y": 380,
+      "w": 420,
+      "h": 140
+     }
+    }
+   ]
+  },
+  {
+   "scene_id": "s04",
+   "image": "boards/cs106a_l11_c2.png",
+   "pause_seconds": 0,
+   "caption": "编译时只看声明类型，运行时才看真实对象——这叫动态绑定。调用谁的方法，是程序跑起来那一刻才决定的。Java 的绘图引擎全靠这一招。",
+   "boxes": [
+    {
+     "box_id": "name",
+     "text": "动态绑定",
+     "role": "celltitle",
+     "font_size": 46,
+     "color": "#F5F4E8",
+     "align": "center",
+     "background": "transparent",
+     "stage": 1,
+     "rect_1920x1080_px": {
+      "x": 190,
+      "y": 560,
+      "w": 330,
+      "h": 100
+     }
+    },
+    {
+     "box_id": "why",
+     "text": "运行时才决定\n调谁的 draw",
+     "role": "body",
+     "font_size": 38,
+     "color": "#F6D87F",
+     "align": "center",
+     "background": "transparent",
+     "stage": 2,
+     "rect_1920x1080_px": {
+      "x": 690,
+      "y": 400,
+      "w": 400,
+      "h": 90
+     }
+    },
+    {
+     "box_id": "fail",
+     "text": "编译看声明\n运行看对象",
+     "role": "body",
+     "font_size": 34,
+     "color": "#97D9F5",
+     "align": "center",
+     "background": "transparent",
+     "stage": 3,
+     "rect_1920x1080_px": {
+      "x": 1370,
+      "y": 380,
+      "w": 420,
+      "h": 140
+     }
+    }
+   ]
+  },
+  {
+   "scene_id": "s05",
+   "image": "boards/cs106a_l11_c3.png",
+   "pause_seconds": 7,
+   "caption": "看看你的屏幕：按钮、菜单、滚动条，每个组件都有自己的绘制和响应方式，但窗口管理器用同一套代码调度它们。图形界面就是多态的活教材。停一停：如果没有多态，窗口系统会怎样？",
+   "boxes": [
+    {
+     "box_id": "name",
+     "text": "图形界面",
+     "role": "celltitle",
+     "font_size": 54,
+     "color": "#F5F4E8",
+     "align": "center",
+     "background": "transparent",
+     "stage": 1,
+     "rect_1920x1080_px": {
+      "x": 190,
+      "y": 560,
+      "w": 330,
+      "h": 100
+     }
+    },
+    {
+     "box_id": "why",
+     "text": "按钮菜单滚动条\n一套代码调度",
+     "role": "body",
+     "font_size": 38,
+     "color": "#F6D87F",
+     "align": "center",
+     "background": "transparent",
+     "stage": 2,
+     "rect_1920x1080_px": {
+      "x": 690,
+      "y": 400,
+      "w": 400,
+      "h": 90
+     }
+    },
+    {
+     "box_id": "fail",
+     "text": "多态的活教材",
+     "role": "body",
+     "font_size": 34,
+     "color": "#97D9F5",
+     "align": "center",
+     "background": "transparent",
+     "stage": 3,
+     "rect_1920x1080_px": {
+      "x": 1370,
+      "y": 380,
+      "w": 420,
+      "h": 140
+     }
+    }
+   ]
+  },
+  {
+   "scene_id": "s06",
+   "image": "boards/cs106a_s06.png",
+   "pause_seconds": 0,
+   "caption": "三个坑：一、用 if-else 判断类型再强转，多态白学；二、把所有图形塞进一个类，用开关变量区分；三、在父类里写死子类特有的逻辑。",
+   "boxes": [
+    {
+     "box_id": "title",
+     "text": "常见陷阱",
+     "role": "title",
+     "font_size": 60,
+     "color": "#F6D87F",
+     "align": "left",
+     "background": "transparent",
+     "stage": 1,
+     "rect_1920x1080_px": {
+      "x": 70,
+      "y": 70,
+      "w": 480,
+      "h": 92
+     }
+    },
+    {
+     "box_id": "rule",
+     "text": "一、if 判断再强转\n二、开关变量塞一类\n三、父类写死子类逻辑",
+     "role": "celltext",
+     "font_size": 38,
+     "color": "#F5F4E8",
+     "align": "center",
+     "background": "transparent",
+     "stage": 1,
+     "rect_1920x1080_px": {
+      "x": 740,
+      "y": 450,
+      "w": 480,
+      "h": 260
+     }
+    },
+    {
+     "box_id": "note",
+     "text": "类型判断\n多态白学",
+     "role": "body",
+     "font_size": 28,
+     "color": "#97D9F5",
+     "align": "center",
+     "background": "transparent",
+     "stage": 2,
+     "rect_1920x1080_px": {
+      "x": 1580,
+      "y": 250,
+      "w": 250,
+      "h": 150
+     }
+    }
+   ]
+  },
+  {
+   "scene_id": "s07",
+   "image": "boards/cs106a_s07.png",
+   "pause_seconds": 0,
+   "caption": "真实一幕：Java 绘图引擎拿到一千个组件，一个循环调 paint——每个组件画自己。Swing 源码里没有一行 if 判断『你是按钮还是菜单』。",
+   "boxes": [
+    {
+     "box_id": "title",
+     "text": "动手例子",
+     "role": "title",
+     "font_size": 60,
+     "color": "#F6D87F",
+     "align": "left",
+     "background": "transparent",
+     "stage": 1,
+     "rect_1920x1080_px": {
+      "x": 70,
+      "y": 70,
+      "w": 480,
+      "h": 92
+     }
+    },
+    {
+     "box_id": "inp",
+     "text": "一千个组件\n一个循环",
+     "role": "body",
+     "font_size": 38,
+     "color": "#F5F4E8",
+     "align": "center",
+     "background": "transparent",
+     "stage": 2,
+     "rect_1920x1080_px": {
+      "x": 170,
+      "y": 480,
+      "w": 240,
+      "h": 200
+     }
+    },
+    {
+     "box_id": "out",
+     "text": "Swing 源码\n没有类型判断",
+     "role": "body",
+     "font_size": 34,
+     "color": "#F5F4E8",
+     "align": "center",
+     "background": "transparent",
+     "stage": 3,
+     "rect_1920x1080_px": {
+      "x": 1530,
+      "y": 400,
+      "w": 260,
+      "h": 280
+     }
+    }
+   ]
+  },
+  {
+   "scene_id": "s08",
+   "image": "boards/cs106a_s08.png",
+   "pause_seconds": 0,
+   "caption": "这一讲多态落了地。下一讲，事件驱动——鼠标一点，程序怎么醒过来。斯坦福 CS106A，下节课见。",
+   "boxes": [
+    {
+     "box_id": "you",
+     "text": "多态落地",
+     "role": "celltitle",
+     "font_size": 60,
+     "color": "#F5F4E8",
+     "align": "center",
+     "background": "transparent",
+     "stage": 1,
+     "rect_1920x1080_px": {
+      "x": 460,
+      "y": 690,
+      "w": 230,
+      "h": 200
+     }
+    },
+    {
+     "box_id": "next",
+     "text": "下一讲",
+     "role": "databar",
+     "font_size": 44,
+     "color": "#F6D87F",
+     "align": "center",
+     "background": "transparent",
+     "stage": 2,
+     "rect_1920x1080_px": {
+      "x": 1240,
+      "y": 500,
+      "w": 340,
+      "h": 120
+     }
+    },
+    {
+     "box_id": "karel",
+     "text": "事件驱动",
+     "role": "celltitle",
+     "font_size": 44,
+     "color": "#F5F4E8",
+     "align": "center",
+     "background": "transparent",
+     "stage": 2,
+     "rect_1920x1080_px": {
+      "x": 1670,
+      "y": 470,
+      "w": 200,
+      "h": 180
+     }
+    }
+   ]
+  }
+ ]
+}
