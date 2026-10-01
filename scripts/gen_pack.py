@@ -25,13 +25,16 @@ def scene(sid, image, pause, caption, boxes):
 
 def build(s):
     ser = s["series"]
+    trap_title = s.get("s06_title", "常见陷阱")
+    ex_title = s.get("s07_title", "动手例子")
+    BP = s.get("board_prefix", "cs106a")
     scenes = [
-        scene("s01", "boards/cs106a_s01.png", 0, s["captions"]["s01"], [
+        scene("s01", f"boards/{BP}_s01.png", 0, s["captions"]["s01"], [
             box("title", s["s01"]["title"], "title", 58, "#F5F4E8", "left", 1, 480, 360, 980, 100),
             box("sub", s["s01"]["sub"], "subtitle", 38, "#97D9F5", "left", 1, 484, 500, 900, 64),
             box("hook", s["s01"]["hook"], "databar", 42, "#F6D87F", "left", 2, 484, 640, 760, 72),
         ]),
-        scene("s02", "boards/cs106a_s02.png", 0, s["captions"]["s02"], [
+        scene("s02", f"boards/{BP}_s02.png", 0, s["captions"]["s02"], [
             box("q", s["s02"]["q"], "body", 32, "#F6D87F", "center", 1, 460, 380, 260, 130),
             box("c1", s["s02"]["c1"], "celltext", 28, "#F5F4E8", "center", 1, 1160, 450, 170, 200),
             box("c2", s["s02"]["c2"], "celltext", 28, "#F5F4E8", "center", 1, 1385, 450, 180, 200),
@@ -53,17 +56,17 @@ def build(s):
             box("why", s["s05"]["why"], "body", 38, "#F6D87F", "center", 2, 690, 400, 400, 90),
             box("fail", s["s05"]["fail"], "body", 34, "#97D9F5", "center", 3, 1370, 380, 420, 140),
         ]),
-        scene("s06", "boards/cs106a_s06.png", 0, s["captions"]["s06"], [
-            box("title", "常见陷阱", "title", 60, "#F6D87F", "left", 1, 70, 70, 480, 92),
+        scene("s06", f"boards/{BP}_s06.png", 0, s["captions"]["s06"], [
+            box("title", trap_title, "title", 60, "#F6D87F", "left", 1, 70, 70, 480, 92),
             box("rule", s["s06"]["rule"], "celltext", 38, "#F5F4E8", "center", 1, 740, 450, 480, 260),
             box("note", s["s06"]["note"], "body", 28, "#97D9F5", "center", 2, 1580, 250, 250, 150),
         ]),
-        scene("s07", "boards/cs106a_s07.png", 0, s["captions"]["s07"], [
-            box("title", "动手例子", "title", 60, "#F6D87F", "left", 1, 70, 70, 480, 92),
+        scene("s07", f"boards/{BP}_s07.png", 0, s["captions"]["s07"], [
+            box("title", ex_title, "title", 60, "#F6D87F", "left", 1, 70, 70, 480, 92),
             box("inp", s["s07"]["inp"], "body", 38, "#F5F4E8", "center", 2, 170, 480, 240, 200),
             box("out", s["s07"]["out"], "body", 34, "#F5F4E8", "center", 3, 1530, 400, 260, 280),
         ]),
-        scene("s08", "boards/cs106a_s08.png", 0, s["captions"]["s08"], [
+        scene("s08", f"boards/{BP}_s08.png", 0, s["captions"]["s08"], [
             box("you", s["s08"]["you"], "celltitle", 60, "#F5F4E8", "center", 1, 460, 690, 230, 200),
             box("next", s["s08"]["next"], "databar", 44, "#F6D87F", "center", 2, 1240, 500, 340, 120),
             box("karel", s["s08"]["karel"], "celltitle", 44, "#F5F4E8", "center", 2, 1670, 470, 200, 180),
